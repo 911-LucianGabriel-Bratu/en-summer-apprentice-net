@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System;
 using TicketManagementSystem.Models.DTOs;
+using TicketManagementSystem.Services;
 
 namespace TicketManagementSystem.Controllers
 {
@@ -10,43 +11,24 @@ namespace TicketManagementSystem.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
+        private IEventService _eventService;
+
+        public EventController(IEventService eventService)
+        {
+            this._eventService = eventService;
+        }
+
         [HttpGet]
         public ActionResult<List<EventDTO>> GetAll()
         {
-            var events = new List<EventDTO>();
-
-            events.Add(new EventDTO
-            {
-                EventId = 1,
-                EventName = "Test",
-                EventDescription = "Test",
-                EventType = "Test",
-                Venue = "Test"
-            });
-
-            events.Add(new EventDTO
-            {
-                EventId = 2,
-                EventName = "Test",
-                EventDescription = "Test",
-                EventType= "Test",
-                Venue = "Test"
-            });
-
+            List<EventDTO> events = this._eventService.GetEvents();
             return Ok(events);
         }
 
         [HttpGet]
         public ActionResult<EventDTO> GetById(long id) {
-            var eventDTO = new EventDTO
-            {
-                EventId = 2,
-                EventName = "Test",
-                EventDescription = "Test",
-                EventType = "Test",
-                Venue = "Test"
-            };
-            return Ok(eventDTO);
+            var @event = this._eventService.GetEventById(id);
+            return Ok(@event);
         }
     }
 }
