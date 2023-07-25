@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drago\\source\\TicketManagementSystem\\TicketManagementSystem.csproj": {}
+    "C:\\Users\\drago\\source\\EndavaNET\\en-summer-apprentice-net\\TicketManagementSystem\\TicketManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drago\\source\\TicketManagementSystem\\TicketManagementSystem.csproj": {
+    "C:\\Users\\drago\\source\\EndavaNET\\en-summer-apprentice-net\\TicketManagementSystem\\TicketManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drago\\source\\TicketManagementSystem\\TicketManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\drago\\source\\EndavaNET\\en-summer-apprentice-net\\TicketManagementSystem\\TicketManagementSystem.csproj",
         "projectName": "TicketManagementSystem",
-        "projectPath": "C:\\Users\\drago\\source\\TicketManagementSystem\\TicketManagementSystem.csproj",
+        "projectPath": "C:\\Users\\drago\\source\\EndavaNET\\en-summer-apprentice-net\\TicketManagementSystem\\TicketManagementSystem.csproj",
         "packagesPath": "C:\\Users\\drago\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drago\\source\\TicketManagementSystem\\obj\\",
+        "outputPath": "C:\\Users\\drago\\source\\EndavaNET\\en-summer-apprentice-net\\TicketManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\drago\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,16 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.9, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
