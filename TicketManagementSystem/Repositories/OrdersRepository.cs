@@ -1,4 +1,5 @@
-﻿using TicketManagementSystem.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TicketManagementSystem.Models;
 
 namespace TicketManagementSystem.Repositories
 {
@@ -18,13 +19,23 @@ namespace TicketManagementSystem.Repositories
 
         public Order GetOrderById(long id)
         {
-            Order order = this._dbContext.Orders.Where(o => o.OrderId == id).FirstOrDefault();
+            Order order = this._dbContext.Orders
+                .Include(o => o.Customer)
+                .Where(o => o.CustomerId != null)
+                .Include(o => o.TicketCategory)
+                .Where(o => o.TicketCategoryId != null)
+                .FirstOrDefault(o => o.OrderId == id);
             return order;
         }
 
         public List<Order> GetOrders()
         {
-            return this._dbContext.Orders.ToList();
+            return this._dbContext.Orders
+                .Include(o => o.Customer)
+                .Where(o => o.CustomerId != null)
+                .Include(o => o.TicketCategory)
+                .Where(o => o.TicketCategoryId != null)
+                .ToList();
         }
 
         public void RemoveOrder(long id)

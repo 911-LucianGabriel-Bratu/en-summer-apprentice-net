@@ -24,6 +24,8 @@ namespace TicketManagementSystem.Services
             return new OrdersDTO()
             {
                 OrderId = order.OrderId,
+                TicketCategoryDescription = order.TicketCategory?.Description,
+                CustomerName = order.Customer?.CustomerName,
                 OrderedAt = order.OrderedAt,
                 NumberOfTickets = order.NumberOfTickets,
                 TotalPrice = order.TotalPrice
@@ -36,6 +38,8 @@ namespace TicketManagementSystem.Services
             List<OrdersDTO> ordersDTOs = orders.Select(o => new OrdersDTO()
             {
                 OrderId=o.OrderId,
+                TicketCategoryDescription = o.TicketCategory?.Description,
+                CustomerName = o.Customer?.CustomerName,
                 OrderedAt = o.OrderedAt,
                 NumberOfTickets=o.NumberOfTickets,
                 TotalPrice = o.TotalPrice
