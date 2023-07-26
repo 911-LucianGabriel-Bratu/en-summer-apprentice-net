@@ -19,15 +19,19 @@ namespace TicketManagementSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<EventDTO>> GetAll()
+        public async Task<ActionResult<List<EventDTO>>> GetAll()
         {
-            List<EventDTO> events = this._eventService.GetEvents();
+            List<EventDTO> events = await this._eventService.GetEvents();
             return Ok(events);
         }
 
         [HttpGet]
-        public ActionResult<EventDTO> GetById(long id) {
-            var @event = this._eventService.GetEventById(id);
+        public async Task<ActionResult<EventDTO>> GetById(long id) {
+            var @event = await this._eventService.GetEventById(id);
+            if(@event == null)
+            {
+                return NotFound();
+            }
             return Ok(@event);
         }
     }

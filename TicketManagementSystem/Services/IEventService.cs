@@ -5,8 +5,8 @@ namespace TicketManagementSystem.Services
 {
     public interface IEventService
     {
-        List<EventDTO> GetEvents();
-        EventDTO GetEventById(long id);
+        Task<List<EventDTO>> GetEvents();
+        Task<EventDTO> GetEventById(long id);
 
         Event AddEvent(Event @event);
 

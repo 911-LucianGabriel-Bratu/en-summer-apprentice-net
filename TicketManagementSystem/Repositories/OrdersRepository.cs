@@ -17,25 +17,26 @@ namespace TicketManagementSystem.Repositories
             return order;
         }
 
-        public Order GetOrderById(long id)
+        public async Task<Order> GetOrderById(long id)
         {
-            Order order = this._dbContext.Orders
+            Order? order = await this._dbContext.Orders
                 .Include(o => o.Customer)
                 .Where(o => o.CustomerId != null)
                 .Include(o => o.TicketCategory)
                 .Where(o => o.TicketCategoryId != null)
-                .FirstOrDefault(o => o.OrderId == id);
+                .FirstOrDefaultAsync(o => o.OrderId == id);
             return order;
         }
 
-        public List<Order> GetOrders()
+        public async Task<List<Order>> GetOrders()
         {
-            return this._dbContext.Orders
+            List<Order> orders = await this._dbContext.Orders
                 .Include(o => o.Customer)
                 .Where(o => o.CustomerId != null)
                 .Include(o => o.TicketCategory)
                 .Where(o => o.TicketCategoryId != null)
-                .ToList();
+                .ToListAsync();
+            return orders;
         }
 
         public void RemoveOrder(Order order)

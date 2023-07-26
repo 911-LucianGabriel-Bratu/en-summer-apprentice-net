@@ -4,8 +4,8 @@ namespace TicketManagementSystem.Repositories
 {
     public interface IEventRepository
     {
-        List<Event> GetEvents();
-        Event GetEventById(long id);
+        Task<List<Event>> GetEvents();
+        Task<Event> GetEventById(long id);
 
         Event AddEvent(Event @event);
 

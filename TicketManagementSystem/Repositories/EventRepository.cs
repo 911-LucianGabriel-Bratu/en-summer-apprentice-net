@@ -19,24 +19,26 @@ namespace TicketManagementSystem.Repositories
             return @event;
         }
 
-        public Event GetEventById(long id)
+        public async Task<Event> GetEventById(long id)
         {
-            return dbContext.Events
+            Event? @event =  await dbContext.Events
                 .Include(e => e.EventType)
                 .Where(e => e.EventTypeId != null)
                 .Include(e => e.Venue)
                 .Where(e => e.VenueId != null)
-                .FirstOrDefault(e => e.EventId == id);
+                .FirstOrDefaultAsync(e => e.EventId == id);
+            return @event;
         }
 
-        public List<Event> GetEvents()
+        public async Task<List<Event>> GetEvents()
         {
-            return dbContext.Events
+            List<Event> events = await dbContext.Events
                 .Include(e => e.EventType)
                 .Where(e => e.EventTypeId != null)
                 .Include(e => e.Venue)
                 .Where(e => e.VenueId != null)
-                .ToList();
+                .ToListAsync();
+            return events;
         }
 
         public void RemoveEvent(Event @event)

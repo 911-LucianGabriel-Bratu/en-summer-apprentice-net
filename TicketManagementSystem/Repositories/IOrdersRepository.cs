@@ -4,8 +4,8 @@ namespace TicketManagementSystem.Repositories
 {
     public interface IOrdersRepository
     {
-        List<Order> GetOrders();
-        Order GetOrderById(long id);
+        Task<List<Order>> GetOrders();
+        Task<Order> GetOrderById(long id);
 
         Order AddOrder(Order order);
 

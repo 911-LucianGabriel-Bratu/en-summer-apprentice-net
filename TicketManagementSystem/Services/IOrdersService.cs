@@ -5,8 +5,8 @@ namespace TicketManagementSystem.Services
 {
     public interface IOrdersService
     {
-        List<OrdersDTO> GetOrders();
-        OrdersDTO GetOrderById(long id);
+        Task<List<OrdersDTO>> GetOrders();
+        Task<OrdersDTO> GetOrderById(long id);
 
         Order AddOrder(Order order);
 

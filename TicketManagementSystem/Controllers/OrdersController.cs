@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketManagementSystem.Models;
+using TicketManagementSystem.Models.DTOs;
 using TicketManagementSystem.Services;
 
 namespace TicketManagementSystem.Controllers
@@ -17,14 +18,19 @@ namespace TicketManagementSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Order>> GetAll() {
-            return Ok(this._ordersService.GetOrders());
+        public async Task<ActionResult<List<Order>>> GetAll() {
+            return Ok(await this._ordersService.GetOrders());
         }
 
         [HttpGet]
-        public ActionResult<Order> GetById(int id)
+        public async Task<ActionResult<Order>> GetById(int id)
         {
-            return Ok(this._ordersService.GetOrderById(id));
+            OrdersDTO order =  await this._ordersService.GetOrderById(id);
+            if(order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
         }
     }
 }

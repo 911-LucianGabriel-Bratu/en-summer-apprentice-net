@@ -22,16 +22,16 @@ namespace TicketManagementSystem.Services
             return this._ordersRepository.AddOrder(order);
         }
 
-        public OrdersDTO GetOrderById(long id)
+        public async Task<OrdersDTO> GetOrderById(long id)
         {
-            Order order = this._ordersRepository.GetOrderById(id);
+            Order order = await this._ordersRepository.GetOrderById(id);
             OrdersDTO ordersDTO = _mapper.Map<OrdersDTO>(order);
             return ordersDTO;
         }
 
-        public List<OrdersDTO> GetOrders()
+        public async Task<List<OrdersDTO>> GetOrders()
         {
-            List<Order> orders = this._ordersRepository.GetOrders();
+            List<Order> orders = await this._ordersRepository.GetOrders();
             List<OrdersDTO> ordersDTOs = orders.Select(o => _mapper.Map<OrdersDTO>(o)).ToList();
             return ordersDTOs;
         }

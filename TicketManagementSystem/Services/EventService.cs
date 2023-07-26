@@ -22,17 +22,17 @@ namespace TicketManagementSystem.Services
             throw new NotImplementedException();
         }
 
-        public EventDTO GetEventById(long id)
+        public async Task<EventDTO> GetEventById(long id)
         {
-            var @event = this._eventRepository.GetEventById(id);
+            var @event = await this._eventRepository.GetEventById(id);
             var eventDTO = _mapper.Map<EventDTO>(@event);
             return eventDTO;
         }
 
-        public List<EventDTO> GetEvents()
+        public async Task<List<EventDTO>> GetEvents()
         {
-            var events = this._eventRepository.GetEvents();
-            List<EventDTO> eventsDTO = events.Select(e => _mapper.Map<EventDTO>(e)).ToList();
+            var events = await this._eventRepository.GetEvents();
+            List <EventDTO> eventsDTO = events.Select(e => _mapper.Map<EventDTO>(e)).ToList();
             return eventsDTO;
         }
 
