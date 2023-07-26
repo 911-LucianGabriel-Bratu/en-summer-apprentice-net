@@ -43,10 +43,16 @@ namespace TicketManagementSystem.Repositories
             return events;
         }
 
-        public void RemoveEvent(Event @event)
+        public async Task<Event> RemoveEvent(long id)
         {
-            dbContext.Remove(@event);
-            dbContext.SaveChanges();
+            var @event = await this.GetEventById(id);
+            if(@event != null)
+            {
+                dbContext.Remove(@event);
+                dbContext.SaveChanges();
+                return @event;
+            }
+            return null;
         }
 
         public async Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO)

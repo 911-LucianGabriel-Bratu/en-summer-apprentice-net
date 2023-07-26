@@ -10,7 +10,7 @@ namespace TicketManagementSystem.Repositories
 
         Event AddEvent(Event @event);
 
-        void RemoveEvent(Event @event);
+        Task<Event> RemoveEvent(long id);
 
         Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO);
     }

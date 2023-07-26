@@ -37,7 +37,7 @@ public partial class TicketManagementSystemDbContext : DbContext
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__B611CB9D946E0F22");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__B611CB9DB602DE5C");
 
             entity.ToTable("Customer");
 
@@ -56,7 +56,7 @@ public partial class TicketManagementSystemDbContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.EventId).HasName("PK__Event__2DC7BD69F3B6C3BD");
+            entity.HasKey(e => e.EventId).HasName("PK__Event__2DC7BD6916F1982C");
 
             entity.ToTable("Event");
 
@@ -80,20 +80,20 @@ public partial class TicketManagementSystemDbContext : DbContext
 
             entity.HasOne(d => d.EventType).WithMany(p => p.Events)
                 .HasForeignKey(d => d.EventTypeId)
-                .HasConstraintName("FK__Event__eventType__607D3EDD");
+                .HasConstraintName("FK_Event_EventType");
 
             entity.HasOne(d => d.Venue).WithMany(p => p.Events)
                 .HasForeignKey(d => d.VenueId)
-                .HasConstraintName("FK__Event__venueID__5F891AA4");
+                .HasConstraintName("FK_Event_Venue");
         });
 
         modelBuilder.Entity<EventType>(entity =>
         {
-            entity.HasKey(e => e.EventTypeId).HasName("PK__EventTyp__04ACC49DA227BC86");
+            entity.HasKey(e => e.EventTypeId).HasName("PK__EventTyp__04ACC49DDE4CDE36");
 
             entity.ToTable("EventType");
 
-            entity.HasIndex(e => e.EventTypeName, "UQ__EventTyp__F1C27EB1ECD28DB5").IsUnique();
+            entity.HasIndex(e => e.EventTypeName, "UQ__EventTyp__F1C27EB1A6A812CF").IsUnique();
 
             entity.Property(e => e.EventTypeId).HasColumnName("eventTypeID");
             entity.Property(e => e.EventTypeName)
@@ -104,7 +104,7 @@ public partial class TicketManagementSystemDbContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D76E9BEFE");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D766B2AF6");
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.CustomerId).HasColumnName("customerID");
@@ -119,16 +119,16 @@ public partial class TicketManagementSystemDbContext : DbContext
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("FK__Orders__customer__66361833");
+                .HasConstraintName("FK_Orders_Customer");
 
             entity.HasOne(d => d.TicketCategory).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.TicketCategoryId)
-                .HasConstraintName("FK__Orders__ticketCa__672A3C6C");
+                .HasConstraintName("FK_Orders_TicketCategory");
         });
 
         modelBuilder.Entity<TicketCategory>(entity =>
         {
-            entity.HasKey(e => e.TicketCategoryId).HasName("PK__TicketCa__56F2E67AFB010EC4");
+            entity.HasKey(e => e.TicketCategoryId).HasName("PK__TicketCa__56F2E67A8AD7B746");
 
             entity.ToTable("TicketCategory");
 
@@ -144,7 +144,7 @@ public partial class TicketManagementSystemDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.TicketCategories)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK__TicketCat__event__6359AB88");
+                .HasConstraintName("FK_TicketCategory_Event");
         });
 
         modelBuilder.Entity<TotalNumberOfTicketsPerCategory>(entity =>
@@ -162,7 +162,7 @@ public partial class TicketManagementSystemDbContext : DbContext
 
         modelBuilder.Entity<Venue>(entity =>
         {
-            entity.HasKey(e => e.VenueId).HasName("PK__Venue__4DDFB71FEBA05BDC");
+            entity.HasKey(e => e.VenueId).HasName("PK__Venue__4DDFB71F7A817782");
 
             entity.ToTable("Venue");
 

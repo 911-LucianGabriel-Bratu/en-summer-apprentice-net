@@ -46,5 +46,16 @@ namespace TicketManagementSystem.Controllers
             }
             return Ok(eventUpdate);
         }
+        [HttpDelete]
+        [Route("{id:long}")]
+        public async Task<ActionResult<EventDTO>> DeleteEvent([FromRoute] long id)
+        {
+            var eventDTO =  await this._eventService.RemoveEvent(id);
+            if( eventDTO == null)
+            {
+                return NotFound();
+            }
+            return Ok(eventDTO);
+        }
     }
 }

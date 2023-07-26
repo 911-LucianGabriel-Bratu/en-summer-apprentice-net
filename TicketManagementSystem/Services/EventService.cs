@@ -36,9 +36,10 @@ namespace TicketManagementSystem.Services
             return eventsDTO;
         }
 
-        public void RemoveEvent(long id)
+        public async Task<EventDTO> RemoveEvent(long id)
         {
-            throw new NotImplementedException();
+            var @event = await this._eventRepository.RemoveEvent(id);
+            return _mapper.Map<EventDTO>(@event);
         }
 
         public async Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO)
