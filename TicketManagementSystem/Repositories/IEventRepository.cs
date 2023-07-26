@@ -4,7 +4,6 @@ namespace TicketManagementSystem.Repositories
 {
     public interface IEventRepository
     {
-        TicketManagementSystemDbContext fetchDBContext();
         List<Event> GetEvents();
         Event GetEventById(long id);
 

@@ -13,10 +13,6 @@ namespace TicketManagementSystem.Repositories
             dbContext = new TicketManagementSystemDbContext();
         }
 
-        public TicketManagementSystemDbContext fetchDBContext()
-        {
-            return dbContext;
-        }
         public Event AddEvent(Event @event)
         {
             dbContext.Add(@event);
