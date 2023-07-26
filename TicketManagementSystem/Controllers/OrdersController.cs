@@ -32,5 +32,29 @@ namespace TicketManagementSystem.Controllers
             }
             return Ok(order);
         }
+
+        [HttpDelete]
+        [Route("{id:long}")]
+        public async Task<ActionResult<OrdersDTO>> DeleteOrder([FromRoute] long id)
+        {
+            OrdersDTO order = await this._ordersService.RemoveOrder(id);
+            if( order == null )
+            {
+                return NotFound();
+            }
+            return Ok(order);
+        }
+
+        [HttpPatch]
+        [Route("{id:long}")]
+        public async Task<ActionResult<OrdersUpdateDTO>> UpdateOrder([FromRoute] long id, OrdersUpdateDTO ordersUpdateDTO)
+        {
+            OrdersUpdateDTO order = await this._ordersService.UpdateOrder(id, ordersUpdateDTO);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
+        }
     }
 }

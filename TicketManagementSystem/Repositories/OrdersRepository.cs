@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicketManagementSystem.Models;
+using TicketManagementSystem.Models.DTOs;
 
 namespace TicketManagementSystem.Repositories
 {
@@ -39,17 +40,32 @@ namespace TicketManagementSystem.Repositories
             return orders;
         }
 
-        public void RemoveOrder(Order order)
+        public async Task<Order> RemoveOrder(long id)
         {
-            this._dbContext.Remove(order);
-            this._dbContext.SaveChanges();
+            var order = await this.GetOrderById(id);
+            if(order != null)
+            {
+                _dbContext.Remove(order);
+                _dbContext.SaveChanges();
+                return order;
+            }
+            return null;
         }
 
-        public Order UpdateOrder(Order order)
+        public async Task<OrdersUpdateDTO> UpdateOrder(long id, OrdersUpdateDTO ordersUpdateDTO)
         {
-            this._dbContext.Update(order);
-            this._dbContext.SaveChanges();
-            return order;
+            var order = await this.GetOrderById(id);
+
+            if(order != null)
+            {
+                var pricePerTicket = order.TotalPrice / order.NumberOfTickets;
+                order.OrderedAt = ordersUpdateDTO.OrderedAt;
+                order.NumberOfTickets = ordersUpdateDTO.NumberOfTickets;
+                order.TotalPrice = pricePerTicket * ordersUpdateDTO.NumberOfTickets;
+                await _dbContext.SaveChangesAsync();
+                return ordersUpdateDTO;
+            }
+            return null;
         }
     }
 }

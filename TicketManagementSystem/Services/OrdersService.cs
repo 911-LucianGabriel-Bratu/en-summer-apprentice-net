@@ -36,14 +36,14 @@ namespace TicketManagementSystem.Services
             return ordersDTOs;
         }
 
-        public void RemoveOrder(long id)
+        public async Task<OrdersUpdateDTO> UpdateOrder(long id, OrdersUpdateDTO ordersUpdateDTO)
         {
-            throw new NotImplementedException();
+            return await this._ordersRepository.UpdateOrder(id, ordersUpdateDTO);
         }
 
-        public Order UpdateOrder(Order order)
+        public async Task<OrdersDTO> RemoveOrder(long id)
         {
-            throw new NotImplementedException();
+            return this._mapper.Map<OrdersDTO>(await _ordersRepository.RemoveOrder(id));
         }
     }
 }

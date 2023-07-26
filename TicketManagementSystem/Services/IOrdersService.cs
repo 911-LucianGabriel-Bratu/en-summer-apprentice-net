@@ -10,8 +10,8 @@ namespace TicketManagementSystem.Services
 
         Order AddOrder(Order order);
 
-        void RemoveOrder(long id);
+        Task<OrdersDTO> RemoveOrder(long id);
 
-        Order UpdateOrder(Order order);
+        Task<OrdersUpdateDTO> UpdateOrder(long id, OrdersUpdateDTO ordersUpdateDTO);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using TicketManagementSystem.Models;
+using TicketManagementSystem.Models.DTOs;
 
 namespace TicketManagementSystem.Repositories
 {
@@ -9,8 +10,8 @@ namespace TicketManagementSystem.Repositories
 
         Order AddOrder(Order order);
 
-        void RemoveOrder(Order order);
+        Task<Order> RemoveOrder(long id);
 
-        Order UpdateOrder(Order order);
+        Task<OrdersUpdateDTO> UpdateOrder(long id, OrdersUpdateDTO ordersUpdateDTO);
     }
 }
