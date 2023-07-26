@@ -1,4 +1,5 @@
 ﻿using TicketManagementSystem.Models;
+using TicketManagementSystem.Models.DTOs;
 
 namespace TicketManagementSystem.Repositories
 {
@@ -11,6 +12,6 @@ namespace TicketManagementSystem.Repositories
 
         void RemoveEvent(Event @event);
 
-        Event UpdateEvent(Event @event);
+        Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO);
     }
 }

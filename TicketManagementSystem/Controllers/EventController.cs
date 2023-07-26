@@ -34,5 +34,17 @@ namespace TicketManagementSystem.Controllers
             }
             return Ok(@event);
         }
+
+        [HttpPatch]
+        [Route("{id:long}")]
+        public async Task<ActionResult<EventUpdateDTO>> UpdateEvent([FromRoute] long id, EventUpdateDTO eventUpdateDTO)
+        {
+            EventUpdateDTO eventUpdate = await this._eventService.UpdateEvent(id, eventUpdateDTO);
+            if(eventUpdate == null)
+            {
+                return NotFound();
+            }
+            return Ok(eventUpdate);
+        }
     }
 }

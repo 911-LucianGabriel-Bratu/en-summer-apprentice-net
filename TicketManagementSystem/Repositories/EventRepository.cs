@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 using TicketManagementSystem.Models;
+using TicketManagementSystem.Models.DTOs;
 
 namespace TicketManagementSystem.Repositories
 {
@@ -47,11 +49,20 @@ namespace TicketManagementSystem.Repositories
             dbContext.SaveChanges();
         }
 
-        public Event UpdateEvent(Event @event)
+        public async Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO)
         {
-            dbContext.Update(@event);
-            dbContext.SaveChanges();
-            return @event;
+            var @event = await this.GetEventById(id);
+            if (@event != null)
+            {
+                @event.EventDescription = eventUpdateDTO.EventDescription;
+                @event.EventName = eventUpdateDTO.EventName;
+                @event.StartDate = eventUpdateDTO.StartDate;
+                @event.EndDate = eventUpdateDTO.EndDate;
+                await dbContext.SaveChangesAsync();
+                return eventUpdateDTO;
+            }
+
+            return null;
         }
     }
 }

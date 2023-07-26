@@ -41,9 +41,10 @@ namespace TicketManagementSystem.Services
             throw new NotImplementedException();
         }
 
-        public Event UpdateEvent(Event @event)
+        public async Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO)
         {
-            throw new NotImplementedException();
+            var @event = await this._eventRepository.UpdateEvent(id, eventUpdateDTO);
+            return @event;
         }
     }
 }

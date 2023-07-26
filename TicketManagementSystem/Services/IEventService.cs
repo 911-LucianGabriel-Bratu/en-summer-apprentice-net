@@ -12,6 +12,6 @@ namespace TicketManagementSystem.Services
 
         void RemoveEvent(long id);
 
-        Event UpdateEvent(Event @event);
+        Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO);
     }
 }
