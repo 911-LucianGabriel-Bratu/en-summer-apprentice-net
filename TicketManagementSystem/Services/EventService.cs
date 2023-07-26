@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using TicketManagementSystem.Models;
 using TicketManagementSystem.Models.DTOs;
 using TicketManagementSystem.Repositories;
@@ -8,10 +9,12 @@ namespace TicketManagementSystem.Services
     public class EventService : IEventService
     {
         private IEventRepository _eventRepository;
+        private IMapper _mapper;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IMapper mapper)
         {
             _eventRepository = eventRepository;
+            _mapper = mapper;
         }
 
         public Event AddEvent(Event @event)
@@ -22,28 +25,14 @@ namespace TicketManagementSystem.Services
         public EventDTO GetEventById(long id)
         {
             var @event = this._eventRepository.GetEventById(id);
-            var eventDTO = new EventDTO
-            {
-                EventId = @event.EventId,
-                EventDescription = @event.EventDescription ?? string.Empty,
-                EventName = @event.EventName ?? string.Empty,
-                EventType = @event.EventType?.EventTypeName ?? string.Empty,
-                Venue = @event.Venue?.Location ?? string.Empty
-            };
+            var eventDTO = _mapper.Map<EventDTO>(@event);
             return eventDTO;
         }
 
         public List<EventDTO> GetEvents()
         {
             var events = this._eventRepository.GetEvents();
-            List<EventDTO> eventsDTO = events.Select(e => new EventDTO()
-            {
-                EventId = e.EventId,
-                EventDescription = e.EventDescription ?? string.Empty,
-                EventName = e.EventName ?? string.Empty,
-                EventType = e.EventType?.EventTypeName ?? string.Empty,
-                Venue = e.Venue?.Location ?? string.Empty
-            }).ToList();
+            List<EventDTO> eventsDTO = events.Select(e => _mapper.Map<EventDTO>(e)).ToList();
             return eventsDTO;
         }
 

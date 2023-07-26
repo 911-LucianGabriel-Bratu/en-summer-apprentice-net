@@ -38,14 +38,16 @@ namespace TicketManagementSystem.Repositories
                 .ToList();
         }
 
-        public void RemoveOrder(long id)
+        public void RemoveOrder(Order order)
         {
-            this._dbContext.Remove(id);
+            this._dbContext.Remove(order);
+            this._dbContext.SaveChanges();
         }
 
         public Order UpdateOrder(Order order)
         {
             this._dbContext.Update(order);
+            this._dbContext.SaveChanges();
             return order;
         }
     }

@@ -21,6 +21,7 @@ namespace TicketManagementSystem
 
             builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
             builder.Services.AddTransient<IOrdersService, OrdersService>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
             var app = builder.Build();

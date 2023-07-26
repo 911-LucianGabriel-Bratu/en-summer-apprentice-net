@@ -9,7 +9,7 @@ namespace TicketManagementSystem.Repositories
 
         Order AddOrder(Order order);
 
-        void RemoveOrder(long id);
+        void RemoveOrder(Order order);
 
         Order UpdateOrder(Order order);
     }

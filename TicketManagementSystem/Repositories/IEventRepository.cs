@@ -9,7 +9,7 @@ namespace TicketManagementSystem.Repositories
 
         Event AddEvent(Event @event);
 
-        void RemoveEvent(long id);
+        void RemoveEvent(Event @event);
 
         Event UpdateEvent(Event @event);
     }

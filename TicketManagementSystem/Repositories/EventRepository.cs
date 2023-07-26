@@ -39,14 +39,16 @@ namespace TicketManagementSystem.Repositories
                 .ToList();
         }
 
-        public void RemoveEvent(long id)
+        public void RemoveEvent(Event @event)
         {
-            dbContext.Remove(id);
+            dbContext.Remove(@event);
+            dbContext.SaveChanges();
         }
 
         public Event UpdateEvent(Event @event)
         {
             dbContext.Update(@event);
+            dbContext.SaveChanges();
             return @event;
         }
     }

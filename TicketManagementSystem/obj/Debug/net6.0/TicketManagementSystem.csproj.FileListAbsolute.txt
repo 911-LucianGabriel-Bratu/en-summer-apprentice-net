@@ -117,3 +117,5 @@ C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\
 C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\obj\Debug\net6.0\TicketManagementSystem.pdb
 C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\obj\Debug\net6.0\TicketManagementSystem.genruntimeconfig.cache
 C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\obj\Debug\net6.0\ref\TicketManagementSystem.dll
+C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\drago\source\EndavaNET\en-summer-apprentice-net\TicketManagementSystem\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

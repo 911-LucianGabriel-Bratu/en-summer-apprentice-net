@@ -1,5 +1,7 @@
-﻿using TicketManagementSystem.Models;
+﻿using AutoMapper;
+using TicketManagementSystem.Models;
 using TicketManagementSystem.Models.DTOs;
+using TicketManagementSystem.Profiles;
 using TicketManagementSystem.Repositories;
 
 namespace TicketManagementSystem.Services
@@ -7,10 +9,12 @@ namespace TicketManagementSystem.Services
     public class OrdersService : IOrdersService
     {
         private IOrdersRepository _ordersRepository;
+        private IMapper _mapper;
 
-        public OrdersService(IOrdersRepository ordersRepository)
+        public OrdersService(IOrdersRepository ordersRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository;
+            _mapper = mapper;
         }
 
         public Order AddOrder(Order order)
@@ -21,40 +25,25 @@ namespace TicketManagementSystem.Services
         public OrdersDTO GetOrderById(long id)
         {
             Order order = this._ordersRepository.GetOrderById(id);
-            return new OrdersDTO()
-            {
-                OrderId = order.OrderId,
-                TicketCategoryDescription = order.TicketCategory?.Description,
-                CustomerName = order.Customer?.CustomerName,
-                OrderedAt = order.OrderedAt,
-                NumberOfTickets = order.NumberOfTickets,
-                TotalPrice = order.TotalPrice
-            };
+            OrdersDTO ordersDTO = _mapper.Map<OrdersDTO>(order);
+            return ordersDTO;
         }
 
         public List<OrdersDTO> GetOrders()
         {
             List<Order> orders = this._ordersRepository.GetOrders();
-            List<OrdersDTO> ordersDTOs = orders.Select(o => new OrdersDTO()
-            {
-                OrderId=o.OrderId,
-                TicketCategoryDescription = o.TicketCategory?.Description,
-                CustomerName = o.Customer?.CustomerName,
-                OrderedAt = o.OrderedAt,
-                NumberOfTickets=o.NumberOfTickets,
-                TotalPrice = o.TotalPrice
-            }).ToList();
+            List<OrdersDTO> ordersDTOs = orders.Select(o => _mapper.Map<OrdersDTO>(o)).ToList();
             return ordersDTOs;
         }
 
         public void RemoveOrder(long id)
         {
-            this._ordersRepository.RemoveOrder(id);
+            throw new NotImplementedException();
         }
 
         public Order UpdateOrder(Order order)
         {
-            return this._ordersRepository.UpdateOrder(order);
+            throw new NotImplementedException();
         }
     }
 }
