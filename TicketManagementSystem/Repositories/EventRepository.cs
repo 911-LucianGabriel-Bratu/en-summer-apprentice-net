@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using TicketManagementSystem.Models;
 
 namespace TicketManagementSystem.Repositories
@@ -11,6 +12,11 @@ namespace TicketManagementSystem.Repositories
         {
             dbContext = new TicketManagementSystemDbContext();
         }
+
+        public TicketManagementSystemDbContext fetchDBContext()
+        {
+            return dbContext;
+        }
         public Event AddEvent(Event @event)
         {
             dbContext.Add(@event);
@@ -19,12 +25,22 @@ namespace TicketManagementSystem.Repositories
 
         public Event GetEventById(long id)
         {
-            return dbContext.Events.Where(v => v.EventId == id).FirstOrDefault();
+            return dbContext.Events
+                .Include(e => e.EventType)
+                .Where(e => e.EventTypeId != null)
+                .Include(e => e.Venue)
+                .Where(e => e.VenueId != null)
+                .FirstOrDefault(e => e.EventId == id);
         }
 
         public List<Event> GetEvents()
         {
-            return dbContext.Events.ToList();
+            return dbContext.Events
+                .Include(e => e.EventType)
+                .Where(e => e.EventTypeId != null)
+                .Include(e => e.Venue)
+                .Where(e => e.VenueId != null)
+                .ToList();
         }
 
         public void RemoveEvent(long id)
