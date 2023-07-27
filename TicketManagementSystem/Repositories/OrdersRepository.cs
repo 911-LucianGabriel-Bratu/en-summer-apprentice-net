@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TicketManagementSystem.Exceptions;
 using TicketManagementSystem.Models;
 using TicketManagementSystem.Models.DTOs;
 
@@ -26,6 +27,12 @@ namespace TicketManagementSystem.Repositories
                 .Include(o => o.TicketCategory)
                 .Where(o => o.TicketCategoryId != null)
                 .FirstOrDefaultAsync(o => o.OrderId == id);
+
+            if(order == null)
+            {
+                throw new EntityNotFoundException(id, nameof(Order));
+            }
+
             return order;
         }
 
@@ -49,7 +56,10 @@ namespace TicketManagementSystem.Repositories
                 _dbContext.SaveChanges();
                 return order;
             }
-            return null;
+            else
+            {
+                throw new EntityNotFoundException(id, nameof(Order));
+            }
         }
 
         public async Task<OrdersUpdateDTO> UpdateOrder(long id, OrdersUpdateDTO ordersUpdateDTO)
@@ -65,7 +75,10 @@ namespace TicketManagementSystem.Repositories
                 await _dbContext.SaveChangesAsync();
                 return ordersUpdateDTO;
             }
-            return null;
+            else
+            {
+                throw new EntityNotFoundException(id, nameof(Order));
+            }
         }
     }
 }

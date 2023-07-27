@@ -1,4 +1,5 @@
 using NLog.Web;
+using TicketManagementSystem.Middleware;
 using TicketManagementSystem.Repositories;
 using TicketManagementSystem.Services;
 
@@ -38,6 +39,8 @@ namespace TicketManagementSystem
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthorization();
 
