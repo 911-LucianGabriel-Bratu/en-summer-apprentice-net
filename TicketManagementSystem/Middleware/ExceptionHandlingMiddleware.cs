@@ -14,6 +14,7 @@ namespace TicketManagementSystem.Middleware
             _nextRequestDelegate = nextRequestDelegate;
             _logger = logger;
         }
+
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
