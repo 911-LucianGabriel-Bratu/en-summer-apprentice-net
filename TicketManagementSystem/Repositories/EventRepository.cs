@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
+using TicketManagementSystem.Exceptions;
 using TicketManagementSystem.Models;
 using TicketManagementSystem.Models.DTOs;
 
@@ -29,6 +30,12 @@ namespace TicketManagementSystem.Repositories
                 .Include(e => e.Venue)
                 .Where(e => e.VenueId != null)
                 .FirstOrDefaultAsync(e => e.EventId == id);
+
+            if(@event == null)
+            {
+                throw new EntityNotFoundException(id, nameof(Event));
+            }
+
             return @event;
         }
 
@@ -52,7 +59,10 @@ namespace TicketManagementSystem.Repositories
                 dbContext.SaveChanges();
                 return @event;
             }
-            return null;
+            else
+            {
+                throw new EntityNotFoundException(id, nameof(Event));
+            }
         }
 
         public async Task<EventUpdateDTO> UpdateEvent(long id, EventUpdateDTO eventUpdateDTO)
@@ -67,8 +77,10 @@ namespace TicketManagementSystem.Repositories
                 await dbContext.SaveChangesAsync();
                 return eventUpdateDTO;
             }
-
-            return null;
+            else
+            {
+                throw new EntityNotFoundException(id, nameof(Event));
+            }
         }
     }
 }

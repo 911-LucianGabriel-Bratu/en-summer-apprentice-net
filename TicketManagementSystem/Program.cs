@@ -1,3 +1,5 @@
+using NLog.Web;
+using TicketManagementSystem.Middleware;
 using TicketManagementSystem.Repositories;
 using TicketManagementSystem.Services;
 
@@ -15,6 +17,9 @@ namespace TicketManagementSystem
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Logging.ClearProviders();
+            builder.Host.UseNLog();
 
             builder.Services.AddTransient<IEventRepository, EventRepository>();
             builder.Services.AddTransient<IEventService, EventService>();
@@ -34,6 +39,8 @@ namespace TicketManagementSystem
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthorization();
 
